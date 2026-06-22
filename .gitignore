@@ -1,0 +1,27 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+.env
+
+# Archivos de entrada y salidas que pueden contener información sensible
+Files/
+*.mpp
+*.mpd
+*.xlsx
+*.xls
+*.temp.json
+
+# Binarios y paquetes locales
+mpxj/
+*.jar
+*.zip
+*.rar
+
+# Editores y sistema operativo
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+~$*
