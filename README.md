@@ -25,7 +25,7 @@ La lectura del formato MPP se delega a [MPXJ](https://www.mpxj.org/), una biblio
 - Python 3.10+
 - pandas
 - openpyxl
-- Java 11+
+- Java 17 LTS (JDK recomendado)
 - MPXJ 15.x
 
 ## Instalación
@@ -38,11 +38,21 @@ py -m venv .venv
 py -m pip install -r requirements.txt
 ```
 
-2. Instala Java y verifica que esté disponible:
+2. Instala **Java 17 LTS en su edición JDK**. Se recomienda Eclipse Temurin 17; durante la instalación, habilita las opciones para agregar Java al `PATH` y definir `JAVA_HOME`.
+
+Después, cierra y vuelve a abrir PowerShell y verifica la instalación:
 
 ```powershell
 java -version
 ```
+
+La salida debe comenzar con una versión `17`. Por ejemplo:
+
+```text
+openjdk version "17.x.x"
+```
+
+> Instala el **JDK**, no solamente el JRE. Aunque MPXJ puede funcionar con otras versiones compatibles, Java 17 LTS es la versión recomendada y documentada para este proyecto.
 
 3. Descarga la distribución binaria de MPXJ desde su [sitio oficial](https://www.mpxj.org/) y descomprímela en `mpxj/`, o define la variable `MPXJ_HOME` con su ubicación.
 
