@@ -1,6 +1,6 @@
 # MPP to Excel Exporter
 
-Convierte cronogramas de **Microsoft Project (`.mpp`)** en reportes Excel listos para revisar, compartir y filtrar, sin requerir Microsoft Project instalado.
+Convierte cronogramas de **Microsoft Project (`.mpp`)** y **ProjectLibre (`.pod`)** en reportes Excel listos para revisar, compartir y filtrar, sin requerir Microsoft Project ni ProjectLibre instalados.
 
 El proyecto nació de una necesidad operativa real: transformar cronogramas técnicos en un formato accesible para equipos de seguimiento y usuarios de negocio.
 
@@ -15,10 +15,10 @@ El proyecto nació de una necesidad operativa real: transformar cronogramas téc
 ## Flujo de procesamiento
 
 ```text
-Archivo .mpp → MPXJ → JSON temporal → pandas/openpyxl → Reporte .xlsx
+Archivo .mpp/.pod → MPXJ → JSON temporal → pandas/openpyxl → Reporte .xlsx
 ```
 
-La lectura del formato MPP se delega a [MPXJ](https://www.mpxj.org/), una biblioteca de código abierto para archivos de planificación. Python se encarga de transformar los datos y construir el reporte final.
+La lectura de los formatos MPP y POD se delega a [MPXJ](https://www.mpxj.org/), una biblioteca de código abierto para archivos de planificación. Python se encarga de transformar los datos y construir el reporte final.
 
 ## Tecnologías
 
@@ -54,14 +54,42 @@ openjdk version "17.x.x"
 
 > Instala el **JDK**, no solamente el JRE. Aunque MPXJ puede funcionar con otras versiones compatibles, Java 17 LTS es la versión recomendada y documentada para este proyecto.
 
-3. Descarga la distribución binaria de MPXJ desde su [sitio oficial](https://www.mpxj.org/) y descomprímela en `mpxj/`, o define la variable `MPXJ_HOME` con su ubicación.
+3. Descarga la [distribución binaria oficial de MPXJ 15.3.1](https://github.com/joniles/mpxj/releases/download/v15.3.1/mpxj-15.3.1.zip).
 
-> MPXJ no se incluye en este repositorio para evitar versionar binarios y código de terceros.
+> No descargues `Source code (zip)` ni `mpxj-master.zip`: contienen las fuentes y no incluyen la distribución ejecutable que necesita este proyecto.
+
+Descomprime el archivo y copia su contenido en la carpeta `mpxj/` del proyecto. La estructura debe quedar así:
+
+```text
+mpp-to-excel-exporter/
+├── mpp_to_excel.py
+└── mpxj/
+    ├── mpxj.jar
+    ├── lib/
+    └── script/
+```
+
+Comprueba la instalación desde PowerShell:
+
+```powershell
+Test-Path .\mpxj\mpxj.jar
+Test-Path .\mpxj\lib
+```
+
+Ambos comandos deben devolver `True`. Si conservas MPXJ en otra ubicación, usa `--mpxj-home` o define la variable `MPXJ_HOME`.
+
+> MPXJ no se incluye en este repositorio para evitar versionar aproximadamente 69 MB de binarios y código de terceros.
 
 ## Uso
 
 ```powershell
 py mpp_to_excel.py "ruta\cronograma.mpp"
+```
+
+También admite archivos de ProjectLibre:
+
+```powershell
+py mpp_to_excel.py "ruta\cronograma.pod"
 ```
 
 El Excel se crea junto al archivo de entrada. También puedes indicar otra salida o instalación de MPXJ:
@@ -70,6 +98,32 @@ El Excel se crea junto al archivo de entrada. También puedes indicar otra salid
 py mpp_to_excel.py "entrada.mpp" -o "reportes\cronograma.xlsx" --mpxj-home "C:\tools\mpxj"
 ```
 
+## Formatos compatibles
+
+| Extensión | Aplicación de origen |
+|---|---|
+| `.mpp` | Microsoft Project |
+| `.pod` | ProjectLibre |
+
+## Ejemplo incluido
+
+El repositorio incluye [`example/example.pod`](example/example.pod), un cronograma ficticio de ProjectLibre para probar el convertidor sin utilizar información corporativa.
+
+### Entrada: cronograma en ProjectLibre
+
+![Cronograma de ejemplo abierto en ProjectLibre](example/example-in.png)
+
+### Salida: reporte generado en Excel
+
+![Reporte Excel generado a partir del cronograma](example/example-out.png)
+
+Para reproducir el ejemplo:
+
+```powershell
+.\.venv\Scripts\python.exe mpp_to_excel.py ".\example\example.pod"
+```
+
+El comando genera `example/example.xlsx`. Este archivo de salida no se versiona porque puede regenerarse en cualquier momento.
 ## Columnas exportadas
 
 | Columna | Descripción |
@@ -92,7 +146,7 @@ py -m pytest -q
 
 ## Privacidad
 
-Los cronogramas pueden contener nombres de personas, iniciativas y fechas internas. Por eso `.gitignore` excluye archivos MPP, Excel, comprimidos, temporales y la instalación local de MPXJ. Los datos usados en pruebas son completamente ficticios.
+Los cronogramas pueden contener nombres de personas, iniciativas y fechas internas. Por eso `.gitignore` excluye archivos MPP, POD, Excel, comprimidos, temporales y la instalación local de MPXJ. Los datos usados en pruebas son completamente ficticios.
 
 ## Limitaciones
 
