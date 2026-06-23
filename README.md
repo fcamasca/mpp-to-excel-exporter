@@ -30,13 +30,23 @@ La lectura de los formatos MPP y POD se delega a [MPXJ](https://www.mpxj.org/), 
 
 ## Instalación
 
-1. Clona este repositorio y crea un entorno virtual:
+1. Clona este repositorio, crea el entorno virtual e instala las dependencias:
 
 ```powershell
 py -m venv .venv
-.venv\Scripts\Activate.ps1
-py -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
 ```
+
+No es necesario activar el entorno virtual: los comandos de este README invocan directamente su intérprete de Python. Esto evita errores en equipos donde PowerShell bloquea la ejecución de `Activate.ps1`.
+
+Si prefieres activarlo, puedes habilitar scripts únicamente durante la sesión actual:
+
+```powershell
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+.\.venv\Scripts\Activate.ps1
+```
+
+Este cambio no modifica permanentemente la política de ejecución del sistema.
 
 2. Instala **Java 17 LTS en su edición JDK**. Se recomienda Eclipse Temurin 17; durante la instalación, habilita las opciones para agregar Java al `PATH` y definir `JAVA_HOME`.
 
@@ -83,19 +93,19 @@ Ambos comandos deben devolver `True`. Si conservas MPXJ en otra ubicación, usa 
 ## Uso
 
 ```powershell
-py mpp_to_excel.py "ruta\cronograma.mpp"
+.\.venv\Scripts\python.exe mpp_to_excel.py "ruta\cronograma.mpp"
 ```
 
 También admite archivos de ProjectLibre:
 
 ```powershell
-py mpp_to_excel.py "ruta\cronograma.pod"
+.\.venv\Scripts\python.exe mpp_to_excel.py "ruta\cronograma.pod"
 ```
 
 El Excel se crea junto al archivo de entrada. También puedes indicar otra salida o instalación de MPXJ:
 
 ```powershell
-py mpp_to_excel.py "entrada.mpp" -o "reportes\cronograma.xlsx" --mpxj-home "C:\tools\mpxj"
+.\.venv\Scripts\python.exe mpp_to_excel.py "entrada.mpp" -o "reportes\cronograma.xlsx" --mpxj-home "C:\tools\mpxj"
 ```
 
 ## Formatos compatibles
@@ -140,8 +150,8 @@ El comando genera `example/example.xlsx`. Este archivo de salida no se versiona 
 Las pruebas unitarias validan las transformaciones sin necesitar Java ni archivos corporativos:
 
 ```powershell
-py -m pip install -r requirements-dev.txt
-py -m pytest -q
+.\.venv\Scripts\python.exe -m pip install -r requirements-dev.txt
+.\.venv\Scripts\python.exe -m pytest -q
 ```
 
 ## Privacidad
