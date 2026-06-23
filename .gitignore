@@ -29,4 +29,4 @@ Thumbs.db
 
 # Ejemplo público permitido
 !example/
-!example/sample.pod
+!example/example.pod
