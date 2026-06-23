@@ -1,3 +1,6 @@
+![Python](https://img.shields.io/badge/Python-3.10+-blue)
+![License](https://img.shields.io/badge/License-MIT-green)
+![Status](https://img.shields.io/badge/Status-Active-success)
 # MPP to Excel Exporter
 
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
