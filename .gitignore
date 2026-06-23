@@ -9,6 +9,7 @@ venv/
 Files/
 *.mpp
 *.mpd
+*.pod
 *.xlsx
 *.xls
 *.temp.json
@@ -25,3 +26,7 @@ mpxj/
 .DS_Store
 Thumbs.db
 ~$*
+
+# Ejemplo público permitido
+!example/
+!example/sample.pod
