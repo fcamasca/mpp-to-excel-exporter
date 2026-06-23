@@ -1,16 +1,27 @@
 # MPP to Excel Exporter
 
-Convierte cronogramas de **Microsoft Project (`.mpp`)** y **ProjectLibre (`.pod`)** en reportes Excel listos para revisar, compartir y filtrar, sin requerir Microsoft Project ni ProjectLibre instalados.
+![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
+![License](https://img.shields.io/badge/License-MIT-green)
+![Status](https://img.shields.io/badge/Status-Active-success)
 
-El proyecto nació de una necesidad operativa real: transformar cronogramas técnicos en un formato accesible para equipos de seguimiento y usuarios de negocio.
+## ¿Qué hace?
 
-## Qué resuelve
+Convierte cronogramas de Microsoft Project y ProjectLibre en reportes Excel listos para compartir, sin requerir las aplicaciones originales.
 
-- Extrae tareas, fechas, duración, trabajo, avance y recursos asignados.
-- Conserva visualmente la jerarquía del cronograma.
-- Destaca tareas resumen e hitos.
-- Genera una hoja con filtros, encabezado congelado y formatos de fecha y porcentaje.
-- Elimina automáticamente el JSON temporal utilizado durante la conversión.
+## Características
+
+- ✔️ Compatible con Microsoft Project (`.mpp`).
+- ✔️ Compatible con ProjectLibre (`.pod`).
+- ✔️ Exportación a Excel (`.xlsx`).
+- ✔️ Conserva jerarquías e indentación.
+- ✔️ Exporta recursos, duración, fechas y avance.
+- ✔️ Destaca tareas resumen e hitos.
+- ✔️ Genera filtros y formatos de fecha y porcentaje.
+- ✔️ No requiere Microsoft Project ni ProjectLibre instalados.
+
+## Demostración
+
+![Conversión de un cronograma ProjectLibre a Excel](example/demo.gif)
 
 ## Flujo de procesamiento
 
